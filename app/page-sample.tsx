@@ -1,46 +1,45 @@
 import ChatButton from '@/components/ChatButton'
 import NewsSection from '@/components/NewsSection'
-import Header from '@/components/Header'
-import Link from 'next/link'
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
-      <Header />
-
+      {/* Navigation */}
+      <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center">
+              <h1 className="text-2xl font-bold text-navy-900">AIskool!</h1>
+            </div>
+            <div className="flex items-center space-x-4">
+              <a href="/login" className="text-gray-600 hover:text-navy-900 px-3 py-2 text-sm font-medium">
+                로그인
+              </a>
+              <a href="/login" className="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                시작하기
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
 
       {/* Hero Section */}
-      <section className="pt-20 pb-20 px-4">
+      <section className="pt-32 pb-20 px-4">
         <div className="max-w-7xl mx-auto text-center">
-        <div className="flex space-x-8 justify-center mb-12 bg-emerald-500 rounded-full py-2 px-8 w-fit mx-auto">
-                <Link href="/menu1" className="text-yellow-400 hover:text-emerald-600 font-medium transition-colors">
-                  25년 여름 한국어 캠프
-                </Link>
-                <Link href="/menu2" className="text-sm mt-[2px] text-white hover:text-emerald-600 font-medium transition-colors">
-                  26년 1월 AI코딩 캠프
-                </Link>
-                <Link href="/menu3" className="text-sm mt-[2px] text-white hover:text-emerald-600 font-medium transition-colors">
-                  26년 여름 한국어·AI 캠프
-                </Link>
-              
-              </div>
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-navy-900 mb-6">
-            AI와 함께하는
-            <span className="text-emerald-500 flex flex-col mt-3">한국어 영어 AI코딩교육</span>
+            자연어 AI로 만드는
+            <span className="text-emerald-500"> 스마트 교육</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-10">
-          AIskool!은 학생들에게 모든 AI 기술을 제공합니다. <br />
-            TOPIK 자격증은 물론, 영어, 그리고 AI 교육까지
+            한국어 자연어 처리 전문 기술로 더 똑똑한 AI 교육을 경험하세요. 
+            AIskool!의 혁신적인 언어 이해 기술로 완벽한 맞춤형 학습을 제공합니다.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-
-            <a href="#features" className="border border-gray-300 hover:border-gray-400 text-navy-900 px-8 py-4 rounded-lg text-lg font-semibold transition-colors">
-              TOPIK 공부법
-            </a>
-            <a href="#features" className="border border-gray-300 hover:border-gray-400 text-navy-900 px-8 py-4 rounded-lg text-lg font-semibold transition-colors">
-              무제한 문제풀기
-            </a>
             <a href="/login" className="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all transform hover:scale-105">
-             여름 한국어 캠프 이벤트
+              무료로 시작하기
+            </a>
+            <a href="#features" className="border border-gray-300 hover:border-gray-400 text-navy-900 px-8 py-4 rounded-lg text-lg font-semibold transition-colors">
+              더 알아보기
             </a>
           </div>
         </div>
