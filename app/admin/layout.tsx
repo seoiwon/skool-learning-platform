@@ -20,34 +20,52 @@ export default function AdminLayout({
 
   const checkAdminAuth = async () => {
     try {
+      console.log('=== Admin Auth Check Started ===')
       const { data: { user } } = await supabase.auth.getUser()
       
       if (!user) {
+        console.log('❌ No user found, redirecting to login')
         router.push('/login')
         return
       }
 
-      // Check admin role in database
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/role`, {
-        headers: {
-          'Authorization': `Bearer ${(await supabase.auth.getSession()).data.session?.access_token}`
-        }
-      })
+      console.log('✅ User found:', { id: user.id, email: user.email })
 
-      if (response.ok) {
-        const data = await response.json()
-        if (data.role === 'admin') {
+      // Check user_profiles table directly
+      const { data: profile, error } = await supabase
+        .from('user_profiles')
+        .select('role, email')
+        .eq('id', user.id)
+        .single()
+
+      console.log('📊 Profile query result:', { profile, error })
+
+      if (error) {
+        console.log('❌ Error fetching profile:', error.message)
+        // Fallback: check specific admin emails
+        const adminEmails = ['admin@aiskool.com', 'admin@example.com', 'coconut31@naver.com'] // 여기에 실제 관리자 이메일 추가
+        if (adminEmails.includes(user.email || '')) {
+          console.log('✅ Admin access granted by email fallback')
           setIsAdmin(true)
-        } else {
-          router.push('/')
+          return
         }
+        router.push('/')
+        return
+      }
+
+      if (profile?.role === 'admin') {
+        console.log('✅ Admin access granted by role')
+        setIsAdmin(true)
       } else {
+        console.log('❌ User is not admin. Role:', profile?.role)
         router.push('/')
       }
     } catch (error) {
+      console.error('❌ Unexpected error:', error)
       router.push('/')
     } finally {
       setLoading(false)
+      console.log('=== Admin Auth Check Completed ===')
     }
   }
 
@@ -76,6 +94,9 @@ export default function AdminLayout({
               <div className="ml-10 flex items-baseline space-x-4">
                 <Link href="/admin" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                   대시보드
+                </Link>
+                <Link href="/admin/courses" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                  강의 관리
                 </Link>
                 <Link href="/admin/news" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                   뉴스 관리

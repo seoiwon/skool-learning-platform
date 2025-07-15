@@ -33,8 +33,8 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
 
-            <a href="#features" className="border border-gray-300 hover:border-gray-400 text-navy-900 px-8 py-4 rounded-lg text-lg font-semibold transition-colors">
-              TOPIK 공부법
+            <a href="/courses" className="border border-gray-300 hover:border-gray-400 text-navy-900 px-8 py-4 rounded-lg text-lg font-semibold transition-colors">
+              TOPIK 공부하기
             </a>
             <a href="#features" className="border border-gray-300 hover:border-gray-400 text-navy-900 px-8 py-4 rounded-lg text-lg font-semibold transition-colors">
               무제한 문제풀기

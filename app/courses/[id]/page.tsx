@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation'
 import Header from '@/components/Header'
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
+import { requestPaymentLink, PaymentRequest } from '@/lib/payment/payple'
 
 interface Course {
   id: string
@@ -44,74 +45,126 @@ export default function CourseDetailPage() {
   const [loading, setLoading] = useState(true)
   const [enrolled, setEnrolled] = useState(false)
   const [activeTab, setActiveTab] = useState('overview')
+  const [paymentLoading, setPaymentLoading] = useState(false)
 
   useEffect(() => {
     fetchCourseDetails()
     checkEnrollment()
+    
+    // Save current scroll position before leaving
+    const handleBeforeUnload = () => {
+      sessionStorage.setItem('scrollPosition', window.scrollY.toString())
+    }
+    
+    window.addEventListener('beforeunload', handleBeforeUnload)
+    
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+    }
   }, [params.id])
 
   const fetchCourseDetails = async () => {
-    // Mock data - will be replaced with Supabase query
-    const mockCourse: Course = {
-      id: params.id as string,
-      title: 'Python 기초부터 실무까지',
-      description: 'Python 프로그래밍의 기초부터 실무 활용까지 단계별로 학습하는 종합 과정입니다. 변수, 함수, 클래스 등 기본 개념부터 웹 스크래핑, 데이터 분석, 자동화까지 다양한 실무 프로젝트를 통해 Python을 마스터할 수 있습니다.',
-      category: '프로그래밍',
-      level: '입문',
-      duration: '8주',
-      lessons: 24,
-      students: 1250,
-      rating: 4.8,
-      price: 79000,
-      instructor: '김파이썬',
-      thumbnail: '/course-python.jpg',
-      objectives: [
-        'Python 기본 문법과 프로그래밍 개념 이해',
-        '함수, 클래스를 활용한 객체지향 프로그래밍',
-        '파일 처리, 예외 처리 등 실무 필수 기능',
-        '웹 스크래핑을 통한 데이터 수집',
-        'Pandas, NumPy를 활용한 데이터 분석',
-        '업무 자동화 프로그램 개발'
-      ],
-      requirements: [
-        '프로그래밍 경험이 없어도 수강 가능',
-        'Windows, Mac, Linux 중 하나의 운영체제',
-        '학습에 대한 열정과 의지'
-      ],
-      curriculum: [
-        {
-          id: '1',
-          title: 'Python 시작하기',
-          lessons: [
-            { id: '1-1', title: 'Python 소개와 설치', duration: '15:00', preview: true },
-            { id: '1-2', title: '첫 번째 프로그램 작성하기', duration: '20:00', preview: true },
-            { id: '1-3', title: '변수와 자료형', duration: '25:00', preview: false },
-            { id: '1-4', title: '연산자와 표현식', duration: '30:00', preview: false }
-          ]
-        },
-        {
-          id: '2',
-          title: '제어문과 함수',
-          lessons: [
-            { id: '2-1', title: '조건문 if, elif, else', duration: '25:00', preview: false },
-            { id: '2-2', title: '반복문 for, while', duration: '30:00', preview: false },
-            { id: '2-3', title: '함수 정의와 호출', duration: '35:00', preview: false },
-            { id: '2-4', title: '람다 함수와 고급 함수', duration: '40:00', preview: false }
-          ]
-        },
-        {
-          id: '3',
-          title: '객체지향 프로그래밍',
-          lessons: [
-            { id: '3-1', title: '클래스와 객체', duration: '30:00', preview: false },
-            { id: '3-2', title: '상속과 다형성', duration: '35:00', preview: false },
-            { id: '3-3', title: '캡슐화와 추상화', duration: '30:00', preview: false }
-          ]
-        }
-      ]
+    try {
+      // 1. 강의 기본 정보 조회
+      const { data: courseData, error: courseError } = await supabase
+        .from('courses')
+        .select(`
+          id,
+          title,
+          description,
+          category,
+          level,
+          duration,
+          lessons_count,
+          students_count,
+          rating,
+          price,
+          instructor,
+          thumbnail
+        `)
+        .eq('id', params.id)
+        .single()
+
+      if (courseError) {
+        console.error('강의 정보 조회 실패:', courseError)
+        setCourse(null)
+        return
+      }
+
+      // 2. 학습 목표 조회
+      const { data: objectivesData } = await supabase
+        .from('course_objectives')
+        .select('objective')
+        .eq('course_id', params.id)
+        .order('order_index')
+
+      // 3. 수강 요구사항 조회
+      const { data: requirementsData } = await supabase
+        .from('course_requirements')
+        .select('requirement')
+        .eq('course_id', params.id)
+        .order('order_index')
+
+      // 4. 커리큘럼 조회 (섹션과 레슨)
+      const { data: sectionsData } = await supabase
+        .from('course_sections')
+        .select(`
+          id,
+          title,
+          order_index,
+          course_lessons (
+            id,
+            title,
+            duration,
+            preview,
+            order_index
+          )
+        `)
+        .eq('course_id', params.id)
+        .order('order_index')
+
+      // 데이터 변환
+      const objectives = objectivesData?.map(item => item.objective) || []
+      const requirements = requirementsData?.map(item => item.requirement) || []
+      
+      const curriculum: Section[] = sectionsData?.map(section => ({
+        id: section.id,
+        title: section.title,
+        lessons: (section.course_lessons || [])
+          .sort((a: any, b: any) => a.order_index - b.order_index)
+          .map((lesson: any) => ({
+            id: lesson.id,
+            title: lesson.title,
+            duration: lesson.duration,
+            preview: lesson.preview
+          }))
+      })) || []
+
+      const course: Course = {
+        id: courseData.id,
+        title: courseData.title,
+        description: courseData.description,
+        category: courseData.category,
+        level: courseData.level,
+        duration: courseData.duration || '',
+        lessons: courseData.lessons_count || 0,
+        students: courseData.students_count || 0,
+        rating: courseData.rating || 0,
+        price: courseData.price,
+        instructor: courseData.instructor,
+        thumbnail: courseData.thumbnail || '/default-course.jpg',
+        objectives,
+        requirements,
+        curriculum
+      }
+
+      setCourse(course)
+    } catch (error) {
+      console.error('예상치 못한 오류:', error)
+      setCourse(null)
+    } finally {
+      setLoading(false)
     }
-    setCourse(mockCourse)
-    setLoading(false)
   }
 
   const checkEnrollment = async () => {
@@ -124,13 +177,52 @@ export default function CourseDetailPage() {
   }
 
   const handleEnroll = async () => {
+    if (paymentLoading) return
+
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) {
       router.push('/login')
       return
     }
-    // Handle enrollment logic
-    router.push(`/billing?course=${params.id}`)
+
+    if (!course) return
+
+    setPaymentLoading(true)
+
+    try {
+      // 사용자 프로필 정보 가져오기
+      const { data: profile } = await supabase
+        .from('user_profiles')
+        .select('full_name, email')
+        .eq('id', user.id)
+        .single()
+
+      // 결제 요청 데이터 준비
+      const paymentData: PaymentRequest = {
+        courseId: course.id,
+        userId: user.id,
+        amount: course.price,
+        courseName: course.title,
+        customerName: profile?.full_name || user.email?.split('@')[0] || '사용자',
+        customerEmail: user.email || '',
+        customerPhone: ''
+      }
+
+      // Payple 결제 링크 생성 요청
+      const paymentResult = await requestPaymentLink(paymentData)
+
+      if (paymentResult.success && paymentResult.paymentUrl) {
+        // 결제 페이지로 이동
+        window.location.href = paymentResult.paymentUrl
+      } else {
+        alert(paymentResult.message || '결제 링크 생성에 실패했습니다. 다시 시도해주세요.')
+      }
+    } catch (error) {
+      console.error('결제 오류:', error)
+      alert('결제 중 오류가 발생했습니다. 다시 시도해주세요.')
+    } finally {
+      setPaymentLoading(false)
+    }
   }
 
   if (loading || !course) {
@@ -155,6 +247,30 @@ export default function CourseDetailPage() {
         {/* Course Header */}
         <div className="bg-gray-900 text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            {/* Back Button */}
+            <button
+              onClick={() => {
+                // Save current scroll position
+                sessionStorage.setItem('scrollPosition', window.scrollY.toString())
+                router.back()
+              }}
+              className="flex items-center text-gray-300 hover:text-white mb-6 transition-colors"
+            >
+              <svg
+                className="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
+              </svg>
+              뒤로가기
+            </button>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               <div className="lg:col-span-2">
                 <div className="flex items-center gap-4 mb-4">
@@ -221,9 +337,10 @@ export default function CourseDetailPage() {
                   ) : (
                     <button
                       onClick={handleEnroll}
-                      className="w-full bg-emerald-500 hover:bg-emerald-600 text-white py-3 rounded-lg font-medium transition-colors"
+                      disabled={paymentLoading}
+                      className="w-full bg-emerald-500 hover:bg-emerald-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white py-3 rounded-lg font-medium transition-colors"
                     >
-                      수강 신청하기
+                      {paymentLoading ? '결제 진행 중...' : '수강 신청하기'}
                     </button>
                   )}
                   

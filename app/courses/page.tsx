@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Header from '@/components/Header'
 import Link from 'next/link'
+import { supabase } from '@/lib/supabase'
 
 interface Course {
   id: string
@@ -32,6 +33,13 @@ export default function CoursesPage() {
 
   useEffect(() => {
     fetchCourses()
+    
+    // Restore scroll position when returning from course detail page
+    const savedScrollPosition = sessionStorage.getItem('scrollPosition')
+    if (savedScrollPosition) {
+      window.scrollTo(0, parseInt(savedScrollPosition))
+      sessionStorage.removeItem('scrollPosition')
+    }
   }, [])
 
   useEffect(() => {
@@ -39,95 +47,54 @@ export default function CoursesPage() {
   }, [courses, selectedCategory, selectedLevel, searchQuery])
 
   const fetchCourses = async () => {
-    // Mock data - will be replaced with Supabase query
-    const mockCourses: Course[] = [
-      {
-        id: '1',
-        title: 'Python 기초부터 실무까지',
-        description: 'Python 프로그래밍의 기초부터 실무 활용까지 단계별로 학습합니다.',
-        category: '프로그래밍',
-        level: '입문',
-        duration: '8주',
-        lessons: 24,
-        students: 1250,
-        rating: 4.8,
-        price: 79000,
-        instructor: '김파이썬',
-        thumbnail: '/course-python.jpg'
-      },
-      {
-        id: '2',
-        title: '머신러닝 입문',
-        description: '머신러닝의 기본 개념과 주요 알고리즘을 실습과 함께 배웁니다.',
-        category: 'AI/ML',
-        level: '초급',
-        duration: '10주',
-        lessons: 30,
-        students: 890,
-        rating: 4.7,
-        price: 99000,
-        instructor: '이머신',
-        thumbnail: '/course-ml.jpg'
-      },
-      {
-        id: '3',
-        title: '자연어처리(NLP) 마스터',
-        description: '최신 NLP 기술과 트랜스포머 모델을 활용한 실전 프로젝트',
-        category: 'AI/ML',
-        level: '고급',
-        duration: '12주',
-        lessons: 20,
-        students: 456,
-        rating: 4.9,
-        price: 149000,
-        instructor: '박NLP',
-        thumbnail: '/course-nlp.jpg'
-      },
-      {
-        id: '4',
-        title: 'React로 만드는 웹 애플리케이션',
-        description: 'React 기초부터 실전 프로젝트까지 완벽 마스터',
-        category: '웹개발',
-        level: '중급',
-        duration: '8주',
-        lessons: 32,
-        students: 2100,
-        rating: 4.6,
-        price: 89000,
-        instructor: '최리액트',
-        thumbnail: '/course-react.jpg'
-      },
-      {
-        id: '5',
-        title: '데이터 분석 with Python',
-        description: 'Pandas, NumPy를 활용한 실무 데이터 분석',
-        category: '데이터분석',
-        level: '초급',
-        duration: '6주',
-        lessons: 18,
-        students: 1560,
-        rating: 4.7,
-        price: 69000,
-        instructor: '정데이터',
-        thumbnail: '/course-data.jpg'
-      },
-      {
-        id: '6',
-        title: 'iOS 앱 개발 완성',
-        description: 'Swift를 활용한 iOS 앱 개발 A to Z',
-        category: '모바일',
-        level: '중급',
-        duration: '10주',
-        lessons: 28,
-        students: 780,
-        rating: 4.8,
-        price: 119000,
-        instructor: '강스위프트',
-        thumbnail: '/course-ios.jpg'
+    try {
+      const { data: coursesData, error } = await supabase
+        .from('courses')
+        .select(`
+          id,
+          title,
+          description,
+          category,
+          level,
+          duration,
+          lessons_count,
+          students_count,
+          rating,
+          price,
+          instructor,
+          thumbnail
+        `)
+        .order('created_at', { ascending: false })
+
+      if (error) {
+        console.error('강의 목록 조회 실패:', error)
+        setCourses([])
+        return
       }
-    ]
-    setCourses(mockCourses)
-    setLoading(false)
+
+      // Supabase 데이터를 Course 인터페이스에 맞게 변환
+      const formattedCourses: Course[] = coursesData.map(course => ({
+        id: course.id,
+        title: course.title,
+        description: course.description,
+        category: course.category,
+        level: course.level,
+        duration: course.duration || '',
+        lessons: course.lessons_count || 0,
+        students: course.students_count || 0,
+        rating: course.rating || 0,
+        price: course.price,
+        instructor: course.instructor,
+        thumbnail: course.thumbnail || '/default-course.jpg'
+      }))
+
+      setCourses(formattedCourses)
+    } catch (error) {
+      console.error('예상치 못한 오류:', error)
+      setCourses([])
+    } finally {
+      setLoading(false)
+    }
   }
 
   const filterCourses = () => {
