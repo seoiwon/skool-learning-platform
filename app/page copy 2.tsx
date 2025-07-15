@@ -12,7 +12,7 @@ export default function Home() {
               <img src="/logo.png" alt="SKOOL" className="h-14 w-auto" />
             </div>
             
-            {/* Navigation */}
+            {/* Navigation123 */}
             <nav className="flex items-center space-x-4">
               <button className="px-4 py-2 text-gray-700 hover:text-gray-900 font-medium transition-colors">
                 로그인
