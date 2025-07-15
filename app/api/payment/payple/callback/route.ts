@@ -4,6 +4,10 @@ import { supabase } from '@/lib/supabase'
 // Payple 결제 인증 결과 콜백
 export async function POST(request: NextRequest) {
   try {
+    if (!supabase) {
+      return NextResponse.json({ error: 'Database not configured' }, { status: 500 })
+    }
+    
     const body = await request.json()
     console.log('Payple 콜백 데이터:', body)
 
@@ -114,11 +118,7 @@ async function savePaymentResult(paymentData: any) {
 
     // 3. 강의 수강생 수 증가
     const { error: updateError } = await supabase
-      .from('courses')
-      .update({
-        students_count: supabase.sql`students_count + 1`
-      })
-      .eq('id', courseId)
+      .rpc('increment_students_count', { course_id: courseId })
 
     if (updateError) {
       console.error('수강생 수 업데이트 실패:', updateError)

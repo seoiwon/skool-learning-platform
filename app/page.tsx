@@ -36,7 +36,7 @@ export default function Home() {
             <a href="/courses" className="border border-gray-300 hover:border-gray-400 text-navy-900 px-8 py-4 rounded-lg text-lg font-semibold transition-colors">
               TOPIK 공부하기
             </a>
-            <a href="#features" className="border border-gray-300 hover:border-gray-400 text-navy-900 px-8 py-4 rounded-lg text-lg font-semibold transition-colors">
+            <a href="#features" className="hidden border border-gray-300 hover:border-gray-400 text-navy-900 px-8 py-4 rounded-lg text-lg font-semibold transition-colors">
               무제한 문제풀기
             </a>
             <a href="/login" className="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all transform hover:scale-105">

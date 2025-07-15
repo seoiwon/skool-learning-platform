@@ -4,6 +4,10 @@ import { supabase } from '@/lib/supabase'
 // Payple 웹훅 - 결제 결과 수신
 export async function POST(request: NextRequest) {
   try {
+    if (!supabase) {
+      return NextResponse.json({ error: 'Database not configured' }, { status: 500 })
+    }
+    
     const body = await request.json()
     console.log('Payple 웹훅 데이터:', body)
 
