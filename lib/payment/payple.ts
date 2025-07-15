@@ -1,4 +1,4 @@
-// Payple 링크결제 연동 서비스
+// Payple 링크결제11 연동 서비스
 
 export interface PaymentRequest {
   courseId: string
