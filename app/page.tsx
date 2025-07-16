@@ -1,8 +1,84 @@
+'use client'
 import ChatButton from '@/components/ChatButton'
 import NewsSection from '@/components/NewsSection'
 import Header from '@/components/Header'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 export default function Home() {
+  const learningSteps = [
+    {
+      number: "1",
+      title: "TOPIK 1-2급 공부하기",
+      description: "한국어 읽기와 기본 문법 이해",
+      position: "left"
+    },
+    {
+      number: "FREE",
+      title: "기초 단어 암기",
+      description: "모바일 앱을 통한 전문적인 단어 학습",
+      position: "left",
+      isSmall: true
+    },
+    {
+      number: "2",
+      title: "한국어 현지 캠프",
+      description: "단기 집중 코스 및 현지 문화 체험",
+      position: "right"
+    },
+    {
+      number: "FREE",
+      title: "2025 AI SUMMIT 참가",
+      description: "한국에서 열리는 전 세계 AI 기술 체험",
+      position: "right",
+      isSmall: true
+    },
+    {
+      number: "3",
+      title: "TOPIK 1-2급 시험",
+      description: "실전 시험 환경 경험",
+      position: "left"
+    },
+    {
+      number: "FREE",
+      title: "시험 대비 영상",
+      description: "전문 강사의 시험 현장 어드바이스",
+      position: "left",
+      isSmall: true
+    },
+    {
+      number: "4",
+      title: "TOPIK 3-4급 공부하기",
+      description: "중급 한국어 실력 향상 및 어휘 확장",
+      position: "right"
+    },
+    {
+      number: "FREE",
+      title: "기출 대비 심화 과정",
+      description: "모바일 앱을 통한 기출 모의고사 학습 ",
+      position: "right",
+      isSmall: true
+    },
+    {
+      number: "5",
+      title: "TOPIK 3-4급 시험",
+      description: "실전 시험",
+      position: "left"
+    },
+    {
+      number: "FREE",
+      title: "한국 유학 준비",
+      description: "대학 입학 서류 및 비자 준비 컨설팅",
+      position: "left",
+      isSmall: true
+    },
+    {
+      number: "6",
+      title: "한국 대학 입학",
+      description: "한국에 거주하며 유학생활 시작하기",
+      position: "right"
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -24,14 +100,17 @@ export default function Home() {
               
               </div>
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-navy-900 mb-6">
-            AI와 함께하는
-            <span className="text-emerald-500 flex flex-col mt-3">한국어 영어 AI코딩교육</span>
+            한국어 공부와
+            <span className="text-emerald-500 flex flex-col my-3">가을 캠프를</span>
+            우리와 함께
+            
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-10">
-          AIskool!은 학생들에게 모든 AI 기술을 제공합니다. <br />
-            TOPIK 자격증은 물론, 영어, 그리고 AI 교육까지
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex items-center justify-center">
+          <img src="/logo7.png" className="w-20 h-10"></img>
+          <span className="ml-1 my-4">은 AI 기술과 언어를 교육하는 브랜드입니다.</span>
+          </div>
+    
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
 
             <a href="/courses" className="border border-gray-300 hover:border-gray-400 text-navy-900 px-8 py-4 rounded-lg text-lg font-semibold transition-colors">
               TOPIK 공부하기
@@ -40,96 +119,376 @@ export default function Home() {
               무제한 문제풀기
             </a>
             <a href="/login" className="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all transform hover:scale-105">
-             여름 한국어 캠프 이벤트
+             가을 단기 한국어 캠프
             </a>
           </div>
         </div>
       </section>
 
-      {/* Features Grid */}
+
+
+
+      {/* Lecture Cards */}
       <section id="features" className="py-20 px-4 bg-gray-50">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-navy-900 text-center mb-16">
-            AI 교육의 <span className="text-emerald-500">혁신</span>
-          </h2>
+          <motion.h2 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-4xl font-bold text-navy-900 text-center mb-16"
+          >
+            무조건 합격하는 <span className="text-emerald-500">TOPIK 강의</span>
+          </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Feature 1 */}
-            <div className="bg-stone-100 border border-gray-200 rounded-xl p-8 hover:border-emerald-500/50 transition-colors">
-              <div className="w-12 h-12 bg-emerald-500/20 rounded-lg flex items-center justify-center mb-6">
-                <svg className="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
+            {/* Lecture 1 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group"
+            >
+              <div className="relative">
+                <div className="h-48 bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center">
+                  <div className="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center">
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                </div>
+                <div className="absolute top-4 right-4 bg-emerald-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                  초급
+                </div>
               </div>
-              <h3 className="text-xl font-semibold text-navy-900 mb-3">한국어 특화 AI 분석</h3>
-              <p className="text-gray-600">
-                한국어의 미묘한 뉘앙스까지 이해하는 AI가 정확한 피드백을 제공합니다.
-              </p>
-            </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-navy-900 mb-2">한국어 기초 강의 </h3>
+                <p className="text-gray-600 mb-4 text-sm">
+                  TOPIK 1-2급을 응시하고자 하는 수험생에게 적합합니다.
+                </p>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center text-sm text-gray-500">
+                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    8주 과정
+                  </div>
+                  <div className="hidden flex items-center text-sm text-gray-500">
+                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    1,248명
+                  </div>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="text-2xl font-bold text-emerald-600">₩49,000</div>
+                  <button className="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors group-hover:scale-105 transform duration-200">
+                    수강신청
+                  </button>
+                </div>
+              </div>
+            </motion.div>
 
-            {/* Feature 2 */}
-            <div className="bg-stone-100 border border-gray-200 rounded-xl p-8 hover:border-emerald-500/50 transition-colors">
-              <div className="w-12 h-12 bg-emerald-500/20 rounded-lg flex items-center justify-center mb-6">
-                <svg className="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-                </svg>
+            {/* Lecture 2 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group"
+            >
+              <div className="relative">
+                <div className="h-48 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                  <div className="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center">
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    </svg>
+                  </div>
+                </div>
+                <div className="absolute top-4 right-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                  중급
+                </div>
               </div>
-              <h3 className="text-xl font-semibold text-navy-900 mb-3">자연어 기반 대화형 학습</h3>
-              <p className="text-gray-600">
-                자연스러운 대화로 학습하며 실시간으로 이해도를 파악합니다.
-              </p>
-            </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-navy-900 mb-2">TOPIK 3-4급 문제 유형별 강의</h3>
+                <p className="text-gray-600 mb-4 text-sm">
+                  기출을 유형별로 분석해 빠르게 학습이 가능합니다. (TOPIK 3-4급)
+                </p>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center text-sm text-gray-500">
+                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    12주 과정
+                  </div>
+                  <div className="hidden flex items-center text-sm text-gray-500">
+                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    856명
+                  </div>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="text-2xl font-bold text-blue-600">₩79,000</div>
+                  <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors group-hover:scale-105 transform duration-200">
+                    수강신청
+                  </button>
+                </div>
+              </div>
+            </motion.div>
 
-            {/* Feature 3 */}
-            <div className="bg-stone-100 border border-gray-200 rounded-xl p-8 hover:border-emerald-500/50 transition-colors">
-              <div className="w-12 h-12 bg-emerald-500/20 rounded-lg flex items-center justify-center mb-6">
-                <svg className="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
+            {/* Lecture 3 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group"
+            >
+              <div className="relative">
+                <div className="h-48 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                  <div className="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center">
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                    </svg>
+                  </div>
+                </div>
+                <div className="absolute top-4 right-4 bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                  고급
+                </div>
               </div>
-              <h3 className="text-xl font-semibold text-navy-900 mb-3">학습 분석 리포트</h3>
-              <p className="text-gray-600">
-                상세한 학습 데이터로 진도와 성과를 한눈에 확인하세요.
-              </p>
-            </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-navy-900 mb-2">TOPIK 3-4급 기출 문제 강의</h3>
+                <p className="text-gray-600 mb-4 text-sm">
+                  실전에서 빠르게 문제를 풀기 위한 효과적인 방법을 배워보세요.
+                </p>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center text-sm text-gray-500">
+                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    16주 과정
+                  </div>
+                  <div className="hidden flex items-center text-sm text-gray-500">
+                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    642명
+                  </div>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="text-2xl font-bold text-purple-600">₩89,000</div>
+                  <button className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors group-hover:scale-105 transform duration-200">
+                    수강신청
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
-            {/* Feature 4 */}
-            <div className="bg-stone-100 border border-gray-200 rounded-xl p-8 hover:border-emerald-500/50 transition-colors">
-              <div className="w-12 h-12 bg-emerald-500/20 rounded-lg flex items-center justify-center mb-6">
-                <svg className="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
+      {/* Bundle Deals Section */}
+      <section className="py-20 px-4 bg-gradient-to-br from-emerald-50 to-blue-50">
+        <div className="max-w-6xl mx-auto">
+          <motion.h2 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-4xl font-bold text-navy-900 text-center mb-16"
+          >
+           가을캠프 <span className="text-emerald-500">할인혜택</span>
+          </motion.h2>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Bundle Deal 1 - 초급자 패키지 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300"
+            >
+              <div className="text-center mb-6">
+                <div className="bg-gradient-to-r from-emerald-500 to-green-500 text-white px-4 py-2 rounded-full text-sm font-semibold inline-block mb-4">
+                  초급자 패키지
+                </div>
+                <h3 className="text-2xl font-bold text-navy-900 mb-3">한국어 기초 + 캠프</h3>
+                <p className="text-gray-600 text-sm">
+                  기초 강의로 탄탄한 실력 + 현지 경험
+                </p>
               </div>
-              <h3 className="text-xl font-semibold text-navy-900 mb-3">협업 학습 환경</h3>
-              <p className="text-gray-600">
-                동료들과 함께 학습하고 지식을 공유하는 커뮤니티
-              </p>
-            </div>
+              
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center text-sm">
+                  <svg className="w-5 h-5 text-emerald-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  한국어 기초 강의 (₩49,000)
+                </div>
+                <div className="flex items-center text-sm">
+                  <svg className="w-5 h-5 text-emerald-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  가을 캠프 참여권 (₩800,000)
+                </div>
+                <div className="invisible flex items-center text-sm">
+                  <svg className="w-5 h-5 text-emerald-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  TOPIK 3-4급 기출 문제 강의 (₩89,000)
+                </div>
+                <div className="invisible flex items-center text-sm">
+                  <svg className="w-5 h-5 text-emerald-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  가을 캠프 참여권 (₩800,000)
+                </div>
+                <div className="border-t pt-3 mt-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-500 line-through">정가: ₩849,000</span>
+                    <span className="text-sm bg-red-100 text-red-600 px-2 py-1 rounded">6% 할인</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="text-center">
+                <div className="text-3xl font-bold text-emerald-600 mb-4">₩800,000</div>
+                <button className="w-full bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 text-white py-4 rounded-xl text-lg font-semibold transition-all transform hover:scale-105 duration-200">
+                  지금 신청하기
+                </button>
+              </div>
+            </motion.div>
 
-            {/* Feature 5 */}
-            <div className="bg-stone-100 border border-gray-200 rounded-xl p-8 hover:border-emerald-500/50 transition-colors">
-              <div className="w-12 h-12 bg-emerald-500/20 rounded-lg flex items-center justify-center mb-6">
-                <svg className="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+            {/* Bundle Deal 2 - 중급 패키지 */}
+            <motion.div 
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="bg-white rounded-2xl p-8 shadow-xl border-2 border-emerald-200 hover:shadow-2xl transition-all duration-300 relative"
+            >
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <span className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-6 py-2 rounded-full text-sm font-bold">
+                  🔥 인기
+                </span>
               </div>
-              <h3 className="text-xl font-semibold text-navy-900 mb-3">24/7 한국어 AI 튜터</h3>
-              <p className="text-gray-600">
-                언제든지 한국어로 자유롭게 질문하고 답변받을 수 있습니다.
-              </p>
-            </div>
+              <div className="text-center mb-6">
+                <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded-full text-sm font-semibold inline-block mb-4">
+                  중급 패키지
+                </div>
+                <h3 className="text-2xl font-bold text-navy-900 mb-3">TOPIK 3-4급 완전정복</h3>
+                <p className="text-gray-600 text-sm">
+                  문제 유형별 분석 + 기출문제 완벽 정리
+                </p>
+              </div>
+              
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center text-sm">
+                  <svg className="w-5 h-5 text-emerald-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  TOPIK 3-4급 문제 유형별 강의 (₩79,000)
+                </div>
+                <div className="flex items-center text-sm">
+                  <svg className="w-5 h-5 text-emerald-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  TOPIK 3-4급 기출 문제 강의 (₩89,000)
+                </div>
+                <div className="invisible flex items-center text-sm">
+                  <svg className="w-5 h-5 text-emerald-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  TOPIK 3-4급 기출 문제 강의 (₩89,000)
+                </div>
+                <div className="invisible flex items-center text-sm">
+                  <svg className="w-5 h-5 text-emerald-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  가을 캠프 참여권 (₩800,000)
+                </div>
+                <div className="border-t pt-3 mt-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-500 line-through">정가: ₩168,000</span>
+                    <span className="text-sm bg-red-100 text-red-600 px-2 py-1 rounded">11% 할인</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="text-center">
+                <div className="text-3xl font-bold text-blue-600 mb-4">₩149,000</div>
+                <button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white py-4 rounded-xl text-lg font-semibold transition-all transform hover:scale-105 duration-200">
+                  지금 신청하기
+                </button>
+              </div>
+            </motion.div>
 
-            {/* Feature 6 */}
-            <div className="bg-stone-100 border border-gray-200 rounded-xl p-8 hover:border-emerald-500/50 transition-colors">
-              <div className="w-12 h-12 bg-emerald-500/20 rounded-lg flex items-center justify-center mb-6">
-                <svg className="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
+            {/* Bundle Deal 3 - 올인원 패키지 */}
+            <motion.div 
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="bg-white rounded-2xl p-8   shadow-xl border-2 border-emerald-200 hover:shadow-2xl transition-all duration-300 relative"
+            >
+              <div className="hidden absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <span className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-6 py-2 rounded-full text-sm font-bold">
+                  🔥 인기
+                </span>
               </div>
-              <h3 className="text-xl font-semibold text-navy-900 mb-3">안전한 학습 환경</h3>
-              <p className="text-gray-600">
-                개인정보 보호와 안전한 학습 데이터 관리
-              </p>
-            </div>
+              
+              <div className="text-center mb-6">
+                <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-4 py-2 rounded-full text-sm font-semibold inline-block mb-4">
+                  올인원 패키지
+                </div>
+                <h3 className="text-2xl font-bold text-navy-900 mb-3">완벽한 한국어 마스터</h3>
+                <p className="text-gray-600 text-sm">
+                  기초부터 고급까지 + 가을 캠프 포함
+                </p>
+              </div>
+              
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center text-sm">
+                  <svg className="w-5 h-5 text-emerald-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  한국어 기초 강의 (₩49,000)
+                </div>
+                <div className="flex items-center text-sm">
+                  <svg className="w-5 h-5 text-emerald-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  TOPIK 3-4급 문제 유형별 강의 (₩79,000)
+                </div>
+                <div className="flex items-center text-sm">
+                  <svg className="w-5 h-5 text-emerald-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  TOPIK 3-4급 기출 문제 강의 (₩89,000)
+                </div>
+                <div className="flex items-center text-sm">
+                  <svg className="w-5 h-5 text-emerald-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  가을 캠프 참여권 (₩800,000)
+                </div>
+                <div className="border-t pt-3 mt-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-500 line-through">정가: ₩1,017,000</span>
+                    <span className="text-sm bg-red-100 text-red-600 px-2 py-1 rounded">2% 할인</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="text-center">
+                <div className="text-3xl font-bold text-emerald-600 mb-4">₩1,000,000</div>
+                <button className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white py-4 rounded-xl text-lg font-semibold transition-all transform hover:scale-105 duration-200">
+                  지금 신청하기
+                </button>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -224,55 +583,70 @@ export default function Home() {
       {/* Learning Path Section */}
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-navy-900 text-center mb-16">
-            체계적인 <span className="text-emerald-500">학습 경로</span>
-          </h2>
+          <motion.h2 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-4xl font-bold text-navy-900 text-center mb-16"
+          >
+            한국어 <span className="text-emerald-500">기초부터 유학까지</span>
+          </motion.h2>
           <div className="relative">
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-emerald-500/30"></div>
+            <motion.div 
+              initial={{ scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, delay: 0.3 }}
+              className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-emerald-500/30 origin-top"
+            ></motion.div>
             
             <div className="space-y-12">
-              <div className="flex items-center gap-8">
-                <div className="flex-1 text-right">
-                  <h3 className="text-xl font-semibold text-navy-900 mb-2">AI 기초 이해</h3>
-                  <p className="text-gray-600">인공지능의 개념과 기본 원리 학습</p>
-                </div>
-                <div className="relative z-10 w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center text-white font-bold">1</div>
-                <div className="flex-1"></div>
-              </div>
-              
-              <div className="flex items-center gap-8">
-                <div className="flex-1"></div>
-                <div className="relative z-10 w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center text-white font-bold">2</div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-semibold text-navy-900 mb-2">자연어 처리 입문</h3>
-                  <p className="text-gray-600">텍스트 분석과 언어 모델의 이해</p>
-                </div>
-              </div>
-              
-              <div className="flex items-center gap-8">
-                <div className="flex-1 text-right">
-                  <h3 className="text-xl font-semibold text-navy-900 mb-2">실전 프로젝트</h3>
-                  <p className="text-gray-600">실제 문제 해결을 위한 AI 적용</p>
-                </div>
-                <div className="relative z-10 w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center text-white font-bold">3</div>
-                <div className="flex-1"></div>
-              </div>
-              
-              <div className="flex items-center gap-8">
-                <div className="flex-1"></div>
-                <div className="relative z-10 w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center text-white font-bold">4</div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-semibold text-navy-900 mb-2">고급 AI 기술</h3>
-                  <p className="text-gray-600">최신 연구 동향과 advanced techniques</p>
-                </div>
-              </div>
+              {learningSteps.map((step, index) => (
+                <motion.div 
+                  key={index} 
+                  initial={{ opacity: 0, x: step.position === "left" ? -50 : 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="flex items-center gap-8"
+                >
+                  {step.position === "left" ? (
+                    <>
+                      <div className={`flex-1 ${step.isSmall ? 'flex justify-end' : 'text-right'}`}>
+                        <div className={`${step.isSmall ? 'border border-blue-300 rounded-lg p-3 bg-blue-50/30 inline-block text-right' : ''}`}>
+                          <h3 className={`${step.isSmall ? 'text-sm font-bold text-blue-700' : 'text-xl font-semibold text-navy-900'} mb-2`}>{step.title}</h3>
+                          <p className={`${step.isSmall ? 'text-xs text-black/60' : 'text-gray-600'}`}>{step.description}</p>
+                        </div>
+                      </div>
+                      <div className={`relative z-10 ${step.isSmall ? 'w-12 h-7 bg-blue-500 text-xs' : 'w-12 h-12 bg-emerald-500'} rounded-full flex items-center justify-center text-white font-bold shadow-lg ${step.isSmall ? 'shadow-blue-500/50' : 'shadow-emerald-500/50'}`}>
+                        {step.number}
+                      </div>
+                      <div className="flex-1"></div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="flex-1"></div>
+                      <div className={`relative z-10 ${step.isSmall ? 'w-12 h-7 bg-blue-500 text-xs' : 'w-12 h-12 bg-emerald-500'} rounded-full flex items-center justify-center text-white font-bold shadow-lg ${step.isSmall ? 'shadow-blue-500/50' : 'shadow-emerald-500/50'}`}>
+                        {step.number}
+                      </div>
+                      <div className={`flex-1 ${step.isSmall ? 'flex justify-start' : ''}`}>
+                      <div className={`${step.isSmall ? 'border border-blue-300 rounded-lg p-3 bg-blue-50/30 inline-block text-right' : ''}`}>
+                          <h3 className={`${step.isSmall ? 'text-sm font-bold text-blue-700' : 'text-xl font-semibold text-navy-900'} mb-2`}>{step.title}</h3>
+                          <p className={`${step.isSmall ? 'text-xs text-black/60' : 'text-gray-600'}`}>{step.description}</p>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       {/* Certification Section */}
-      <section className="py-20 px-4 bg-gray-50">
+      <section className="py-20 px-4 bg-gray-50 hidden">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-4xl font-bold text-navy-900 mb-6">
             공인 <span className="text-emerald-500">수료증</span> 발급
@@ -299,7 +673,7 @@ export default function Home() {
       </section>
 
       {/* Integration Section */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 hidden">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold text-navy-900 text-center mb-16">
             강력한 <span className="text-emerald-500">통합 기능</span>
@@ -316,7 +690,7 @@ export default function Home() {
       </section>
 
       {/* Success Metrics Section */}
-      <section className="py-20 px-4 bg-gray-50">
+      <section className="py-20 px-4 bg-gray-50 hidden">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold text-navy-900 text-center mb-16">
             학습 <span className="text-emerald-500">성과 지표</span>
@@ -376,7 +750,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="bg-stone-100 border border-gray-200 rounded-xl p-6">
               <div className="flex items-center justify-between mb-4">
-                <span className="text-emerald-500 text-sm">오늘의 인기 질문</span>
+                <span className="text-emerald-500 text-sm">Facebook</span>
                 <span className="text-gray-500 text-sm">조회 1.2k</span>
               </div>
               <h3 className="text-navy-900 font-semibold mb-2">Transformer 모델의 Attention 메커니즘 이해하기</h3>
@@ -414,165 +788,8 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Comparison Table Section */}
-      <section className="py-20 px-4 bg-gray-50">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-navy-900 text-center mb-16">
-            왜 <span className="text-emerald-500">AIskool!</span>인가?
-          </h2>
-          <div className="overflow-x-auto">
-            <table className="w-full bg-white rounded-lg overflow-hidden shadow-sm">
-              <thead>
-                <tr className="border-b border-gray-200 bg-stone-100">
-                  <th className="text-left py-4 px-6 text-gray-600 font-medium">기능</th>
-                  <th className="text-center py-4 px-6 text-navy-900 font-semibold">AIskool!</th>
-                  <th className="text-center py-4 px-6 text-gray-600 font-medium">타사 A</th>
-                  <th className="text-center py-4 px-6 text-gray-600 font-medium">타사 B</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-b border-gray-200">
-                  <td className="py-4 px-6 text-gray-700">한국어 자연어 처리</td>
-                  <td className="text-center py-4 px-6">
-                    <svg className="w-6 h-6 text-emerald-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </td>
-                  <td className="text-center py-4 px-6">
-                    <svg className="w-6 h-6 text-gray-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </td>
-                  <td className="text-center py-4 px-6">
-                    <svg className="w-6 h-6 text-gray-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </td>
-                </tr>
-                <tr className="border-b border-gray-200">
-                  <td className="py-4 px-6 text-gray-700">24/7 AI 튜터</td>
-                  <td className="text-center py-4 px-6">
-                    <svg className="w-6 h-6 text-emerald-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </td>
-                  <td className="text-center py-4 px-6">
-                    <svg className="w-6 h-6 text-emerald-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </td>
-                  <td className="text-center py-4 px-6">
-                    <svg className="w-6 h-6 text-gray-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </td>
-                </tr>
-                <tr className="border-b border-gray-200">
-                  <td className="py-4 px-6 text-gray-700">실시간 코드 실행</td>
-                  <td className="text-center py-4 px-6">
-                    <svg className="w-6 h-6 text-emerald-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </td>
-                  <td className="text-center py-4 px-6">
-                    <svg className="w-6 h-6 text-gray-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </td>
-                  <td className="text-center py-4 px-6">
-                    <svg className="w-6 h-6 text-emerald-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </td>
-                </tr>
-                <tr className="border-b border-gray-200">
-                  <td className="py-4 px-6 text-gray-700">기업용 관리 도구</td>
-                  <td className="text-center py-4 px-6">
-                    <svg className="w-6 h-6 text-emerald-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </td>
-                  <td className="text-center py-4 px-6">
-                    <svg className="w-6 h-6 text-emerald-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </td>
-                  <td className="text-center py-4 px-6">
-                    <svg className="w-6 h-6 text-emerald-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-4 px-6 text-gray-700">가격</td>
-                  <td className="text-center py-4 px-6 text-emerald-500 font-semibold">₩29,900~</td>
-                  <td className="text-center py-4 px-6 text-gray-600">₩49,000~</td>
-                  <td className="text-center py-4 px-6 text-gray-600">₩39,000~</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      {/* Awards Section */}
-      <section className="py-20 px-4">
-        <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-4xl font-bold text-navy-900 mb-16">
-            수상 <span className="text-emerald-500">경력</span>
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-gradient-to-br from-emerald-500/20 to-emerald-500/10 border border-emerald-500/50 rounded-xl p-8">
-              <div className="w-20 h-20 bg-emerald-500/20 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <svg className="w-10 h-10 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-navy-900 mb-2">2023 AI 교육 혁신상</h3>
-              <p className="text-gray-600">한국인공지능협회</p>
-            </div>
-            
-            <div className="bg-gradient-to-br from-emerald-500/20 to-emerald-500/10 border border-emerald-500/50 rounded-xl p-8">
-              <div className="w-20 h-20 bg-emerald-500/20 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <svg className="w-10 h-10 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-navy-900 mb-2">Best EdTech Startup</h3>
-              <p className="text-gray-600">Asia Pacific Awards</p>
-            </div>
-            
-            <div className="bg-gradient-to-br from-emerald-500/20 to-emerald-500/10 border border-emerald-500/50 rounded-xl p-8">
-              <div className="w-20 h-20 bg-emerald-500/20 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <svg className="w-10 h-10 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-navy-900 mb-2">ISO 27001 인증</h3>
-              <p className="text-gray-600">정보보안 국제표준</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 px-4 bg-emerald-50">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold text-navy-900 mb-6">
-            지금 바로 <span className="text-emerald-500">AI 교육</span>을 시작하세요
-          </h2>
-          <p className="text-xl text-gray-600 mb-10">
-            첫 달은 무료로 모든 기능을 체험해보세요
-          </p>
-          <a href="/login" className="inline-block bg-emerald-500 hover:bg-emerald-600 text-white px-10 py-5 rounded-lg text-lg font-semibold transition-all transform hover:scale-105">
-            무료 체험 시작하기
-          </a>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="py-20 px-4">
+ {/* Testimonials Section */}
+ <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold text-navy-900 text-center mb-16">
             <span className="text-emerald-500">10,000+</span> 학습자의 선택
@@ -624,8 +841,162 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Pricing Section */}
+      {/* Comparison Table Section */}
       <section className="py-20 px-4 bg-gray-50">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-navy-900 text-center mb-16">
+            왜 <span className="text-emerald-500">AIskool!</span>인가?
+          </h2>
+          <div className="overflow-x-auto">
+            <table className="w-full bg-white rounded-lg overflow-hidden shadow-sm">
+              <thead>
+                <tr className="border-b border-gray-200 bg-stone-100">
+                  <th className="text-left py-4 px-6 text-gray-600 font-medium">기능</th>
+                  <th className="text-center py-4 px-6 text-navy-900 font-semibold">AIskool!</th>
+                  <th className="text-center py-4 px-6 text-gray-600 font-medium">타사 A</th>
+                  <th className="text-center py-4 px-6 text-gray-600 font-medium">타사 B</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-gray-200">
+                  <td className="py-4 px-6 text-gray-700">한국 최대 커뮤니티</td>
+                  <td className="text-center py-4 px-6">
+                    <svg className="w-6 h-6 text-emerald-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </td>
+                  <td className="text-center py-4 px-6">
+                    <svg className="w-6 h-6 text-emerald-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </td>
+                  <td className="text-center py-4 px-6">
+                    <svg className="w-6 h-6 text-gray-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </td>
+                </tr>
+                <tr className="border-b border-gray-200">
+                  <td className="py-4 px-6 text-gray-700">한국어 6급 강사</td>
+                  <td className="text-center py-4 px-6">
+                    <svg className="w-6 h-6 text-emerald-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </td>
+                  <td className="text-center py-4 px-6">
+                    <svg className="w-6 h-6 text-gray-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </td>
+                  <td className="text-center py-4 px-6">
+                    <svg className="w-6 h-6 text-emerald-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </td>
+                </tr>
+                <tr className="border-b border-gray-200">
+                  <td className="py-4 px-6 text-gray-700">AI 벤처 교육기업</td>
+                  <td className="text-center py-4 px-6">
+                    <svg className="w-6 h-6 text-emerald-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </td>
+                  <td className="text-center py-4 px-6">
+                    <svg className="w-6 h-6 text-gray-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </td>
+                  <td className="text-center py-4 px-6">
+                    <svg className="w-6 h-6 text-gray-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </td>
+                </tr>
+                <tr className="border-b border-gray-200">
+                  <td className="py-4 px-6 text-gray-700">한국어 강의 및 캠프 동시 운영</td>
+                  <td className="text-center py-4 px-6">
+                    <svg className="w-6 h-6 text-emerald-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </td>
+                  <td className="text-center py-4 px-6">
+                    <svg className="w-6 h-6 text-gray-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </td>
+                  <td className="text-center py-4 px-6">
+                    <svg className="w-6 h-6 text-gray-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </td>
+                </tr>
+        
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+
+
+      {/* Awards Section */}
+      <section className="py-20 px-4 hidden">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-4xl font-bold text-navy-900 mb-16">
+             <span className="text-emerald-500">AI 교육 앱</span>
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-gradient-to-br from-emerald-500/20 to-emerald-500/10 border border-emerald-500/50 rounded-xl p-8">
+              <div className="w-20 h-20 bg-emerald-500/20 rounded-full mx-auto mb-4 flex items-center justify-center">
+                <svg className="w-10 h-10 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-navy-900 mb-2">2023 AI 교육 혁신상</h3>
+              <p className="text-gray-600">한국인공지능협회</p>
+            </div>
+            
+            <div className="bg-gradient-to-br from-emerald-500/20 to-emerald-500/10 border border-emerald-500/50 rounded-xl p-8">
+              <div className="w-20 h-20 bg-emerald-500/20 rounded-full mx-auto mb-4 flex items-center justify-center">
+                <svg className="w-10 h-10 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-navy-900 mb-2">Best EdTech Startup</h3>
+              <p className="text-gray-600">Asia Pacific Awards</p>
+            </div>
+            
+            <div className="bg-gradient-to-br from-emerald-500/20 to-emerald-500/10 border border-emerald-500/50 rounded-xl p-8">
+              <div className="w-20 h-20 bg-emerald-500/20 rounded-full mx-auto mb-4 flex items-center justify-center">
+                <svg className="w-10 h-10 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-navy-900 mb-2">ISO 27001 인증</h3>
+              <p className="text-gray-600">정보보안 국제표준</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 px-4 bg-emerald-50">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl font-bold text-navy-900 mb-6">
+            지금 바로 <span className="text-emerald-500">한국어 공부</span>를 시작하세요
+          </h2>
+          <p className="text-xl text-gray-600 mb-10">
+            단기간에 TOPIK 점수를 받을 수 있는 최고의 커리큘럼을 소개합니다.
+          </p>
+          <a href="/courses" className="inline-block bg-emerald-500 hover:bg-emerald-600 text-white px-10 py-5 rounded-lg text-lg font-semibold transition-all transform hover:scale-105">
+            AI skool 강의 둘러보기
+          </a>
+        </div>
+      </section>
+
+     
+      {/* Pricing Section */}
+      <section className="py-20 px-4 bg-gray-50 hidden">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold text-navy-900 text-center mb-4">
             합리적인 <span className="text-emerald-500">요금제</span>
@@ -796,7 +1167,7 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 px-4 bg-gray-50">
+      <section className="py-20 px-4 bg-gray-50 hidden">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
