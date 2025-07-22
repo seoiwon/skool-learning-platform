@@ -1,0 +1,226 @@
+[
+    {
+      "schemaname": "auth",
+      "tablename": "audit_log_entries",
+      "tableowner": "supabase_auth_admin",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": false
+    },
+    {
+      "schemaname": "auth",
+      "tablename": "flow_state",
+      "tableowner": "supabase_auth_admin",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": true
+    },
+    {
+      "schemaname": "auth",
+      "tablename": "identities",
+      "tableowner": "supabase_auth_admin",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": true
+    },
+    {
+      "schemaname": "auth",
+      "tablename": "instances",
+      "tableowner": "supabase_auth_admin",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": false
+    },
+    {
+      "schemaname": "auth",
+      "tablename": "mfa_amr_claims",
+      "tableowner": "supabase_auth_admin",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": true
+    },
+    {
+      "schemaname": "auth",
+      "tablename": "mfa_challenges",
+      "tableowner": "supabase_auth_admin",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": true
+    },
+    {
+      "schemaname": "auth",
+      "tablename": "mfa_factors",
+      "tableowner": "supabase_auth_admin",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": true
+    },
+    {
+      "schemaname": "auth",
+      "tablename": "one_time_tokens",
+      "tableowner": "supabase_auth_admin",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": true
+    },
+    {
+      "schemaname": "auth",
+      "tablename": "refresh_tokens",
+      "tableowner": "supabase_auth_admin",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": true
+    },
+    {
+      "schemaname": "auth",
+      "tablename": "saml_providers",
+      "tableowner": "supabase_auth_admin",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": true
+    },
+    {
+      "schemaname": "auth",
+      "tablename": "saml_relay_states",
+      "tableowner": "supabase_auth_admin",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": true
+    },
+    {
+      "schemaname": "auth",
+      "tablename": "schema_migrations",
+      "tableowner": "supabase_auth_admin",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": false
+    },
+    {
+      "schemaname": "auth",
+      "tablename": "sessions",
+      "tableowner": "supabase_auth_admin",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": true
+    },
+    {
+      "schemaname": "auth",
+      "tablename": "sso_domains",
+      "tableowner": "supabase_auth_admin",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": true
+    },
+    {
+      "schemaname": "auth",
+      "tablename": "sso_providers",
+      "tableowner": "supabase_auth_admin",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": true
+    },
+    {
+      "schemaname": "auth",
+      "tablename": "users",
+      "tableowner": "supabase_auth_admin",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "News",
+      "tableowner": "postgres",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "Post",
+      "tableowner": "postgres",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "User",
+      "tableowner": "postgres",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "course_enrollments",
+      "tableowner": "postgres",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "course_lessons",
+      "tableowner": "postgres",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "course_objectives",
+      "tableowner": "postgres",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "course_requirements",
+      "tableowner": "postgres",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "course_reviews",
+      "tableowner": "postgres",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "course_sections",
+      "tableowner": "postgres",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "courses",
+      "tableowner": "postgres",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "user_lesson_progress",
+      "tableowner": "postgres",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "user_profiles",
+      "tableowner": "postgres",
+      "hasindexes": true,
+      "hasrules": false,
+      "hastriggers": true
+    }
+  ]

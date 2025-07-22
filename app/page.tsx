@@ -1,5 +1,7 @@
 'use client'
-import ChatButton from '@/components/ChatButton'
+import CreateChatRoom from '@/components/chat/CreateChatRoom'
+import ChatRoomList from '@/components/chat/ChatRoomList'
+import PushNotificationSetup from '@/components/notifications/PushNotificationSetup'
 import NewsSection from '@/components/NewsSection'
 import Header from '@/components/Header'
 import Link from 'next/link'
@@ -641,6 +643,26 @@ export default function Home() {
                 </motion.div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Chat Section */}
+      <section className="py-20 px-4 bg-gray-50">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-navy-900 mb-6">
+              실시간 <span className="text-emerald-500">상담 채팅</span>
+            </h2>
+            <p className="text-xl text-gray-600">
+              궁금한 점이 있으시면 언제든지 채팅으로 문의하세요
+            </p>
+          </div>
+          
+          <div id="chat-section">
+            <PushNotificationSetup />
+            <CreateChatRoom />
+            <ChatRoomList />
           </div>
         </div>
       </section>
@@ -1290,8 +1312,6 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Chat Button */}
-      <ChatButton />
     </div>
   )
 }

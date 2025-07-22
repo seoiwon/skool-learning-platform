@@ -14,7 +14,8 @@
     "react-dom": "^18",
     "@supabase/supabase-js": "^2.39.0",
     "@supabase/auth-helpers-nextjs": "^0.8.0",
-    "framer-motion": "^12.23.5"
+    "framer-motion": "^12.23.5",
+    "date-fns": "^3.6.0"
   },
   "devDependencies": {
     "typescript": "^5",
