@@ -22,9 +22,9 @@ export const getCurrentUser = async () => {
   const { data: { user }, error } = await supabase.auth.getUser()
   if (error || !user) return null
   
-  // Get user profile from User table
+  // Get user profile from user_profiles table
   const { data: profile } = await supabase
-    .from('User')
+    .from('user_profiles')
     .select('*')
     .eq('id', user.id)
     .single()

@@ -1284,25 +1284,25 @@ export default function Home() {
             <div>
               <h4 className="text-navy-900 font-semibold mb-4">제품</h4>
               <ul className="space-y-2">
-                <li><a href="#" className="text-gray-600 hover:text-navy-900 text-sm">기능</a></li>
-                <li><a href="#" className="text-gray-600 hover:text-navy-900 text-sm">요금제</a></li>
-                <li><a href="#" className="text-gray-600 hover:text-navy-900 text-sm">기업용</a></li>
+                <li><a href="/features" className="text-gray-600 hover:text-navy-900 text-sm">기능</a></li>
+                <li><a href="/pricing" className="text-gray-600 hover:text-navy-900 text-sm">요금제</a></li>
+                <li><a href="/contact" className="text-gray-600 hover:text-navy-900 text-sm">기업용</a></li>
               </ul>
             </div>
             <div>
               <h4 className="text-navy-900 font-semibold mb-4">회사</h4>
               <ul className="space-y-2">
-                <li><a href="#" className="text-gray-600 hover:text-navy-900 text-sm">소개</a></li>
-                <li><a href="#" className="text-gray-600 hover:text-navy-900 text-sm">채용</a></li>
-                <li><a href="#" className="text-gray-600 hover:text-navy-900 text-sm">블로그</a></li>
+                <li><a href="/about" className="text-gray-600 hover:text-navy-900 text-sm">소개</a></li>
+                <li><a href="/contact" className="text-gray-600 hover:text-navy-900 text-sm">채용</a></li>
+                <li><a href="/news" className="text-gray-600 hover:text-navy-900 text-sm">블로그</a></li>
               </ul>
             </div>
             <div>
               <h4 className="text-navy-900 font-semibold mb-4">지원</h4>
               <ul className="space-y-2">
-                <li><a href="#" className="text-gray-600 hover:text-navy-900 text-sm">도움말</a></li>
-                <li><a href="#" className="text-gray-600 hover:text-navy-900 text-sm">문의하기</a></li>
-                <li><a href="#" className="text-gray-600 hover:text-navy-900 text-sm">개인정보처리방침</a></li>
+                <li><a href="/help" className="text-gray-600 hover:text-navy-900 text-sm">도움말</a></li>
+                <li><a href="/contact" className="text-gray-600 hover:text-navy-900 text-sm">문의하기</a></li>
+                <li><a href="/privacy" className="text-gray-600 hover:text-navy-900 text-sm">개인정보처리방침</a></li>
               </ul>
             </div>
           </div>

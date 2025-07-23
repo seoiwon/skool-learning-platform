@@ -38,41 +38,82 @@ export default function Dashboard() {
   }
 
   const fetchCourses = async () => {
-    // Mock data for now - will be replaced with actual Supabase query
-    const mockCourses: Course[] = [
-      {
-        id: '1',
-        title: 'Python 기초부터 실무까지',
-        description: 'Python 프로그래밍의 기초부터 실무 활용까지 단계별로 학습합니다.',
-        thumbnail: '/course-python.jpg',
-        progress: 65,
-        total_lessons: 24,
-        completed_lessons: 16,
-        last_accessed: '2024-01-20'
-      },
-      {
-        id: '2',
-        title: '머신러닝 입문',
-        description: '머신러닝의 기본 개념과 주요 알고리즘을 실습과 함께 배웁니다.',
-        thumbnail: '/course-ml.jpg',
-        progress: 30,
-        total_lessons: 30,
-        completed_lessons: 9,
-        last_accessed: '2024-01-19'
-      },
-      {
-        id: '3',
-        title: '자연어처리(NLP) 마스터',
-        description: '최신 NLP 기술과 트랜스포머 모델을 활용한 실전 프로젝트',
-        thumbnail: '/course-nlp.jpg',
-        progress: 0,
-        total_lessons: 20,
-        completed_lessons: 0,
-        last_accessed: '2024-01-15'
+    try {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) return
+
+      // 사용자가 결제한 강의들을 가져오기
+      const { data: enrollments, error } = await supabase
+        .from('course_enrollments')
+        .select(`
+          *,
+          courses (
+            id,
+            title,
+            description,
+            thumbnail,
+            duration,
+            price
+          ),
+          payments!inner (
+            payment_status,
+            created_at
+          )
+        `)
+        .eq('user_id', user.id)
+        .eq('payments.payment_status', 'completed')
+
+      if (error) {
+        console.error('강의 조회 오류:', error)
+        setCourses([])
+        setLoading(false)
+        return
       }
-    ]
-    setCourses(mockCourses)
-    setLoading(false)
+
+      // 각 강의의 진도율 계산
+      const coursesWithProgress = await Promise.all(
+        (enrollments || []).map(async (enrollment: any) => {
+          const course = enrollment.courses
+          
+          // 강의의 총 레슨 수 조회
+          const { data: totalLessons, error: lessonsError } = await supabase
+            .from('course_lessons')
+            .select('id')
+            .eq('course_id', course.id)
+
+          // 완료한 레슨 수 조회
+          const { data: completedLessons, error: progressError } = await supabase
+            .from('user_lesson_progress')
+            .select('id')
+            .eq('user_id', user.id)
+            .eq('course_id', course.id)
+            .eq('completed', true)
+
+          const totalCount = totalLessons?.length || 0
+          const completedCount = completedLessons?.length || 0
+          const progress = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0
+
+          return {
+            id: course.id,
+            title: course.title,
+            description: course.description,
+            thumbnail: course.thumbnail || '/default-course.jpg',
+            progress: progress,
+            total_lessons: totalCount,
+            completed_lessons: completedCount,
+            last_accessed: enrollment.updated_at || enrollment.enrolled_at
+          }
+        })
+      )
+
+      console.log('실제 강의 데이터:', coursesWithProgress)
+      setCourses(coursesWithProgress)
+    } catch (error) {
+      console.error('데이터 조회 실패:', error)
+      setCourses([])
+    } finally {
+      setLoading(false)
+    }
   }
 
   const calculateTotalProgress = () => {
